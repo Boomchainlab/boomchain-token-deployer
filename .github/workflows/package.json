@@ -1,0 +1,14 @@
+{
+  "name": "boomchain-token-deployer",
+  "version": "1.0.0",
+  "description": "CI/CD deployment of Boomchain tokens using Hardhat and GitHub Actions.",
+  "scripts": {
+    "compile": "hardhat compile",
+    "deploy": "npx hardhat run deploy/deploy-token.js --network base"
+  },
+  "dependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.0",
+    "dotenv": "^16.3.1",
+    "hardhat": "^2.22.0"
+  }
+}

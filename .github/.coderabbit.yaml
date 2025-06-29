@@ -1,0 +1,56 @@
+# .coderabbit.yaml for Boomchain Token Deployer
+
+repo:
+  name: boomchain-token-deployer
+  owner: Boomchainlab
+  description: "CI/CD pipeline for deploying ERC-20 tokens on Base using Hardhat and GitHub Actions"
+  primary_language: JavaScript
+
+rules:
+  pull_request:
+    enabled: true
+    require_description: true
+    reviewers:
+      - BoomchainLabs
+    labels:
+      - needs-review
+    branch_protection:
+      enabled: true
+      required_approvals: 1
+
+linting:
+  enabled: true
+  tools:
+    - eslint
+    - prettier
+  ignore:
+    - artifacts/
+    - node_modules/
+    - deployments/
+    - coverage/
+
+documentation:
+  auto_comment_on_missing_docs: true
+  require_top_level_readme: true
+  minimum_comment_ratio: 0.2
+
+code_quality:
+  suggest_code_simplification: true
+  enforce_const_usage: true
+  detect_dead_code: true
+
+ai_assistance:
+  enabled: true
+  autocomment_on_pr: true
+  summarize_changes: true
+  suggest_test_coverage: true
+
+notifications:
+  slack:
+    enabled: false
+  email:
+    to:
+      - dev@boomchainlab.com
+      - support@boomchainlab.com
+
+version: 1.0

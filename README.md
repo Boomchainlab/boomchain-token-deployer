@@ -1,87 +1,102 @@
+# 💥 Boomchain Token Deployer
+
+A fully automated and extensible token deployment pipeline built for **Base Mainnet** using **Hardhat**, **GitHub Actions**, and optional **TokenRegistry** tracking.  
+Created and maintained by [Boomchainlab](https://boomchainlab.com).
+
 ---
 
-### 5. **`contracts/TokenRegistry.sol`**
+## 🧱 Features
 
-**Path:** `contracts/`
+- ✅ GitHub Actions CI/CD for automated on-chain deployment  
+- ✅ EVM-compatible — deploys ERC-20+ token templates  
+- ✅ Manual or multisig-compatible calldata generation  
+- ✅ Secure environment variable handling via GitHub Secrets  
+- ✅ Optional TokenRegistry contract for on-chain indexing  
 
-```solidity
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+---
 
-contract TokenRegistry {
-    mapping(bytes32 => address) public deployedTokens;
-    address public factory;
+## 📁 Project Structure
+boomchain-token-deployer/
+├── contracts/
+│   └── TokenRegistry.sol
+├── deploy/
+│   └── deploy-token.js
+├── scripts/
+│   └── generate-calldata.js
+├── .github/workflows/
+│   └── deploy-token.yml
+├── .env.example
+├── hardhat.config.js
+├── package.json
+└── README.md
+---
 
-    constructor(address _factory) {
-        factory = _factory;
-    }
+## 🚀 Getting Started
 
-    modifier onlyFactory() {
-        require(msg.sender == factory, "Not authorized");
-        _;
-    }
+### 1. Clone & Install
 
-    function register(bytes32 salt, address token) external onlyFactory {
-        deployedTokens[salt] = token;
-    }
+```bash
+git clone https://github.com/Boomchainlab/boomchain-token-deployer.git
+cd boomchain-token-deployer
+npm install
+
+Configure Environment Variables
+
+Copy .env.example and fill in your secrets:
+BASE_RPC_URL=https://mainnet.base.org
+DEPLOYER_PRIVATE_KEY=your_private_key_without_0x
+
+🛠 Deployment via CLI
+Compile contracts:
+npx hardhat compile
+Deploy your token:
+npm run deploy
+
+🧾 Deployment via GitHub Actions
+	1.	Go to the Actions tab
+	2.	Select Deploy Token to Base Mainnet
+	3.	Click Run Workflow
+
+🔐 Token Ownership
+
+Ownership of the deployed token is automatically assigned to:
+0x184bb27def036b32b420750f147af0d56ce72309
+Use a Gnosis Safe or multisig if higher security is required.
+
+🧠 Token Metadata (example)
+{
+  "name": "Thanks Brian Amstrong",
+  "symbol": "TBA",
+  "salt": "0x000...",
+  "imageURI": "https://imagedelivery.net/...",
+  "metadata": {
+    "description": "Token to honor open collaboration",
+    "socialMediaUrls": [],
+    "auditUrls": []
+  },
+  "source": {
+    "interface": "clanker",
+    "platform": "farcaster",
+    "messageId": "0x...",
+    "id": "455962"
+  }
 }
 
-This repository enables secure and automated deployment of ERC-20 compatible tokens on the [Base](https://base.org) network using Hardhat and GitHub Actions.
+🧬 TokenRegistry Contract (Optional)
 
-Built by **Boomchainlab**, it supports:
+To track all deployed tokens, this repo includes:
+contracts/TokenRegistry.sol
+You can deploy it using:
+npx hardhat run scripts/deploy-registry.js --network base
+🤝 Contributing
 
-- ✅ GitHub Actions CI/CD
-- ✅ Manual or automated deployment to Base
-- ✅ Multisig-compatible calldata generation
-- ✅ Optional on-chain TokenRegistry contract
-- ✅ Contract ownership assigned to a secure address
+PRs, forks, and token deployment requests are welcome.
+	•	Dev@boomchainlab.com
+	•	Support: support@boomchainlab.com
+	•	Admin: admin@boomchainlab.com
+🛡 License
 
+MIT © Boomchainlab. Open-source and production-ready.
 ---
 
-## 🔑 Owner Address
-
-All tokens deployed using this repo are controlled by:
-0x184bb27def036b32b420750f147af0d56ce72309
-This wallet will be the:
-- **Owner**
-- **Minter**
-
-Ensure it is a Gnosis Safe or a secure address before production deployment.
-
----
-
-## 🛠 Setup
-
-### 1. Configure GitHub Secrets
-
-| Secret Name             | Description                                |
-|-------------------------|--------------------------------------------|
-| `DEPLOYER_PRIVATE_KEY`  | Private key (no `0x`) of deployer wallet   |
-| `BASE_RPC_URL`          | RPC endpoint (e.g., Infura, Alchemy)       |
-
-### 2. Deploy Token
-
-- Manual trigger via **GitHub → Actions → "Deploy Token"**
-- Or use CLI:
-  ```bash
-  npx hardhat run deploy/deploy-token.js --network base
-  Multisig Mode (Safe Compatible)
-
-  Use the script below to generate calldata:
-  npx hardhat run scripts/generate-calldata.js --network base
-  🧱 Optional: Token Registry
-
-Supports an optional TokenRegistry.sol smart contract to register and index deployed token addresses on-chain.
-
-⸻
-
-📦 Technologies
-	•	Hardhat
-	•	GitHub Actions
-	•	Ethers.js
-	•	dotenv
-	•	Base Network
-
-🏷 License
-
-MIT © Boomchainlab
+✅ You can copy this entire markdown block into a file called `README.md` in your GitHub repo.

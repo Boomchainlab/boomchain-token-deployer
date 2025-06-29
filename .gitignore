@@ -1,0 +1,31 @@
+# Node modules
+node_modules/
+.npm/
+
+# Build output
+artifacts/
+cache/
+typechain/
+coverage/
+
+# dotenv and secrets
+.env
+.env.*
+
+# OS & Editor junk
+.DS_Store
+Thumbs.db
+*.log
+*.tgz
+
+# Hardhat-specific
+hardhat.log
+deployments/
+
+# VSCode / IDE settings
+.vscode/
+.idea/
+
+# GitHub workflows temp
+.github/workflows/*.log
+.github/*.log

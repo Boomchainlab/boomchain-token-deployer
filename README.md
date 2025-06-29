@@ -1,6 +1,30 @@
-# boomchain-token-deployer
-Automated ERC-20 Token Deployment for Boomchainlab on Base, with Multisig Ownership and CI/CD via GitHub Actions.
-# 🚀 Boomchain Token Deployer
+---
+
+### 5. **`contracts/TokenRegistry.sol`**
+
+**Path:** `contracts/`
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract TokenRegistry {
+    mapping(bytes32 => address) public deployedTokens;
+    address public factory;
+
+    constructor(address _factory) {
+        factory = _factory;
+    }
+
+    modifier onlyFactory() {
+        require(msg.sender == factory, "Not authorized");
+        _;
+    }
+
+    function register(bytes32 salt, address token) external onlyFactory {
+        deployedTokens[salt] = token;
+    }
+}
 
 This repository enables secure and automated deployment of ERC-20 compatible tokens on the [Base](https://base.org) network using Hardhat and GitHub Actions.
 

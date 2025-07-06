@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "boomchain-agent": {
+      "url": "https://api.boomchainlab.com/agent/boomchain-deploy",
+      "token": "${BOOMCHAIN_AGENT_TOKEN}",
+      "env": "production",
+      "capabilities": ["build", "deploy", "run"],
+      "entry": "./scripts/agent-entry.js"
+    }
+  }
+}

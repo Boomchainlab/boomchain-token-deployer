@@ -1,0 +1,24 @@
+const { execSync } = require('child_process');
+
+const args = process.argv.slice(2); // Example: ["deploy"]
+const task = args[0];
+
+const commands = {
+  build: "npm run build",
+  deploy: "npx hardhat run scripts/deploy.js --network base",
+  run: "node run-task.js deployer"
+};
+
+if (!commands[task]) {
+  console.error(`❌ Unknown task: ${task}`);
+  process.exit(1);
+}
+
+console.log(`🚀 Executing task: ${task}`);
+try {
+  execSync(commands[task], { stdio: 'inherit' });
+  console.log(`✅ ${task} complete`);
+} catch (e) {
+  console.error(`❌ ${task} failed: ${e.message}`);
+  process.exit(1);
+}

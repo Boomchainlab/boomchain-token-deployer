@@ -1,0 +1,32 @@
+name: Dotenvx Cloak
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.env.production'
+  workflow_dispatch:
+
+jobs:
+  cloak:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Install Dotenvx CLI
+        run: curl -sfS https://dotenvx.sh/pro | sh
+
+      - name: 🔐 Encrypt & Cloak .env.production
+        run: |
+          dotenvx encrypt -f .env.production
+          dotenvx pro cloak -f .env.production
+
+      - name: 📤 Commit Cloaked File
+        run: |
+          git config user.name "Boomchainlab CI Bot"
+          git config user.email "support@boomchainlab.com"
+          git add .env.production.cloak
+          git commit -m "chore(dotenvx): cloak .env.production via Dotenvx Pro" || echo "✅ Nothing to commit"
+          git push origin main

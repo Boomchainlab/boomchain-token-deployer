@@ -29,3 +29,6 @@ deployments/
 # GitHub workflows temp
 .github/workflows/*.log
 .github/*.log
+
+.env*
+!.env*.cloak

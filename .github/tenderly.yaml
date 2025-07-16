@@ -1,0 +1,17 @@
+account_id: boomchainlab
+project_slug: boomchain-base-node
+
+actions:
+  boomchainlab/boomchain-base-node:
+    runtime: v2
+    sources: ./actions
+    specs:
+      watchTokenFlow:
+        description: Watches ERC20 token transfers on Base Mainnet
+        function: watchers/tokenFlow:watchTokenFlow
+        trigger:
+          type: block
+          block:
+            network:
+              - 8453  # Base Mainnet
+            blocks: 5  # Runs every 5 blocks

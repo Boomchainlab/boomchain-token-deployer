@@ -4,7 +4,7 @@ A fully automated and extensible token deployment pipeline built for **Base Main
 Created and maintained by [Boomchainlab](https://boomchainlab.com).
 ![Deploy](https://github.com/Boomchainlab/boomchain-token-deployer/actions/workflows/deploy-token.yml/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Twitter Follow](https://img.shields.io/twitter/follow/BoomchainLabs?style=social)](https://twitter.com/BoomchainLabs)
+[![Twitter Follow](https://img.shields.io/twitter/follow/Boomchainlab?style=social)](https://twitter.com/BoomchainLabs)
 ---
 
 ## 🧱 Features

@@ -1,0 +1,25 @@
+# .github/workflows/token-factory-deploy.yml
+name: Token Factory Deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      name: { description: 'Token Name' }
+      symbol: { description: 'Token Symbol' }
+      supply: { description: 'Total Supply' }
+      fid: { description: 'Farcaster FID' }
+      image: { description: 'Image URI' }
+      castHash: { description: 'Cast Hash' }
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy ERC20 Token
+        run: |
+          forge script scripts/DeployToken.s.sol \
+            --broadcast \
+            --rpc-url ${{ secrets.RPC_URL }} \
+            --private-key ${{ secrets.PRIVATE_KEY }} \
+            --sig "deploy(string,string,uint256,uint256,string,string)"

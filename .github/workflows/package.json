@@ -7,7 +7,7 @@
     "deploy": "npx hardhat run deploy/deploy-token.js --network base"
   },
   "dependencies": {
-    "@nomicfoundation/hardhat-toolbox": "^6.0.0",
+    "@nomicfoundation/hardhat-toolbox": "^7.0.0",
     "dotenv": "^17.0.0",
     "hardhat": "^3.0.0"
   }
